@@ -1,0 +1,4 @@
+lightly
+torch
+torchvision
+jupyter
