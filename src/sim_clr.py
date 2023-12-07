@@ -17,6 +17,8 @@ from lightly.loss import NTXentLoss
 from lightly.models.modules.heads import SimCLRProjectionHead
 
 
+max_epochs = 100
+
 
 
 class SimCLRModel(pl.LightningModule):

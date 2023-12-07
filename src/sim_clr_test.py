@@ -54,11 +54,10 @@ def plot_knn_examples(embeddings, filenames, n_neighbors=3, num_examples=6):
         plt.savefig(f'../results/knn_{idx}.png')
 
 path_to_weights = '../models/sim_clr_100.pth'
-path_to_data = "../lemon-dataset/images"
+path_to_data = "../fruit/lemon_dataset/"
 num_workers = 4
 batch_size = 256
 seed = 1
-max_epochs = 100
 input_size = 128
 num_ftrs = 32
 # We create a torchvision transformation for embedding the dataset after

@@ -19,7 +19,7 @@ from lightly.loss import NTXentLoss
 from lightly.models.modules.heads import SimCLRProjectionHead
 
 
-num_workers = 4
+num_workers = 8
 batch_size = 256
 seed = 1
 max_epochs = 100
@@ -28,8 +28,8 @@ num_ftrs = 32
 
 pl.seed_everything(seed)
 
-path_to_data = "../lemon-dataset/images"
-path_to_weights = '../models/sim_clr_100.pth'
+path_to_data = "../fruit/Dataset/Grading_dataset"
+path_to_weights = '../models/sim_clr_res18_e(100)_mango.pth'
 
 transform = SimCLRTransform(input_size=input_size, vf_prob=0.5, rr_prob=0.5)
 
