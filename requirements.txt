@@ -2,3 +2,4 @@ lightly
 torch
 torchvision
 jupyter
+matplotlib

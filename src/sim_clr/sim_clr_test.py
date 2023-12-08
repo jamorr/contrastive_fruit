@@ -63,39 +63,6 @@ def plot_knn_examples(embeddings, filenames, results_dir, path_to_weights, path_
     with open(f'../results/{save_dir}/annotations.json', 'w') as f:
         f.write(data)
 
-
-# num_workers = 4
-# batch_size = 256
-# seed = 1
-# input_size = 128
-# num_ftrs = 32
-# # We create a torchvision transformation for embedding the dataset after
-# # training
-# test_transform = torchvision.transforms.Compose(
-#     [
-#         torchvision.transforms.Resize((input_size, input_size)),
-#         torchvision.transforms.ToTensor(),
-#         torchvision.transforms.Normalize(
-#             mean=utils.IMAGENET_NORMALIZE["mean"],
-#             std=utils.IMAGENET_NORMALIZE["std"],
-#         ),
-#     ]
-# )
-# dataset_test = LightlyDataset(input_dir=path_to_data, transform=test_transform)
-# dataloader_test = torch.utils.data.DataLoader(
-#     dataset_test,
-#     batch_size=batch_size,
-#     shuffle=False,
-#     drop_last=False,
-#     num_workers=num_workers,
-# )
-# model = SimCLRModel()
-# model.load_state_dict(torch.load(path_to_weights))
-# model.eval()
-# embeddings, filenames = generate_embeddings(model, dataloader_test)
-
-# plot_knn_examples(embeddings, filenames)
-
 def run_self_supervised_testing(args):
     print(f'Testing mode enabled. Using dataset: {args.dataset_test}, model: {args.model}, output directory: {args.output}')
 

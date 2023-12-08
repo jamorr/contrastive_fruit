@@ -14,12 +14,11 @@ class LossLoggingCallback(pl.Callback):
         self.train_losses = []
         self.val_losses = []
 
-    def on_train_batch_end(self, trainer, pl_module, outputs, batch, batch_idx, dataloader_idx):
-        if trainer.global_step % trainer.log_every_n_steps == 0:
-            self.train_losses.append(outputs[0].item())
+    def on_train_batch_end(self, *args):
+        print(*args)
 
-    def on_validation_batch_end(self, trainer, pl_module, outputs, batch, batch_idx, dataloader_idx):
-        self.val_losses.append(outputs[0].item())
+    def on_validation_batch_end(self, trainer, pl_module, outputs, batch, batch_idx):
+        self.val_losses.append(outputs.item())
 
     def on_epoch_end(self, trainer, pl_module):
         avg_train_loss = sum(self.train_losses) / len(self.train_losses) if self.train_losses else 0.0
@@ -29,7 +28,7 @@ class LossLoggingCallback(pl.Callback):
         self.val_losses = []
 
 class SimCLRModel(pl.LightningModule):
-    def __init__(self, max_epochs):
+    def __init__(self, max_epochs:int=100):
         super().__init__()
 
         # create a ResNet backbone and remove the classification head
@@ -38,9 +37,10 @@ class SimCLRModel(pl.LightningModule):
 
         hidden_dim = resnet.fc.in_features
         self.projection_head = SimCLRProjectionHead(hidden_dim, hidden_dim, 128)
-
+        self.max_epochs = max_epochs
         self.criterion = NTXentLoss()
         self.validation_loss = 0.0
+        self.validation_set_size = 0
 
     def forward(self, x):
         h = self.backbone(x).flatten(start_dim=1)
@@ -61,11 +61,14 @@ class SimCLRModel(pl.LightningModule):
         z1 = self.forward(x1)
         loss = self.criterion(z0, z1)
         self.validation_loss += loss.item()
+        self.validation_set_size += 1
         return loss
 
-    def validation_epoch_end(self, outputs):
-        avg_validation_loss = self.validation_loss / len(self.val_dataloader())
+    def on_validation_epoch_end(self):
+        avg_validation_loss = self.validation_loss / self.validation_set_size
         self.log("val_loss_ssl", avg_validation_loss)
+        self.validation_set_size = 0
+        
 
     def configure_optimizers(self):
         optim = torch.optim.SGD(
@@ -73,6 +76,7 @@ class SimCLRModel(pl.LightningModule):
         )
         scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optim, self.max_epochs)
         return [optim], [scheduler]
+    
 
 
 def generate_embeddings(model, dataloader):

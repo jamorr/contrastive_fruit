@@ -3,9 +3,9 @@ import pathlib
 from sim_clr.sim_clr_test import run_self_supervised_testing
 from sim_clr.sim_clr_train import train_sim_clr
 
-path_to_data = "../../fruit/Dataset/Grading_dataset"
-path_to_weights = '../../models/sim_clr_res18_e(50)_256x256_mango.pth'
-
+path_to_data = "/app/fruit/lemon-dataset/images"
+path_to_weights_test = '/app/models/sim_clr_res18_e(50)_256x256_lemon.pth'
+path_to_weights_train = '/app/models/sim_clr_res18_e(100)_256x256_lemon.pth'
 def parse_args():
     parser = argparse.ArgumentParser(description='Self-supervised learning model training and testing')
 
@@ -15,20 +15,21 @@ def parse_args():
     parser.add_argument('--seed', type=int, default=1, help='Random seed for reproducibility')
     parser.add_argument('--max_epochs', type=int, default=100, help='Maximum number of training epochs')
     parser.add_argument('--input_size', type=int, default=256, help='Input size for the model')
+    parser.add_argument('--validate', action='store_true', help='Create validation dataset to use')
 
     # Training output
-    parser.add_argument('--weights_file', type=str, default='../models/', help='Output file path for training weights')
+    parser.add_argument('--weights_file', type=str, default=path_to_weights_train, help='Output file path for training weights')
 
 
     # Model and dataset parameters
     parser.add_argument('--dataset_train', type=str, default=path_to_data, help='Path to training dataset to use')
-    parser.add_argument('--dataset_valid', type=str, default=path_to_data, help='Path to validation dataset to use')
     parser.add_argument('--dataset_test', type=str, default=path_to_data, help='Path to testing dataset to use')
     parser.add_argument('--model', type=str, default="SimCLR", help='Model to use')
+    
 
     # Testing mode
     parser.add_argument('--testing', action='store_true', help='Enable testing mode (ignore other training args)')
-    parser.add_argument('--weights',default=path_to_weights,help='Path to pretrained weights')
+    parser.add_argument('--weights',default=path_to_weights_test,help='Path to pretrained weights')
 
     # Output directory for testing mode
     parser.add_argument('--output', type=str, default='../results/', help='Output directory for testing mode')
@@ -38,7 +39,7 @@ def parse_args():
 
 def main():
     args = parse_args()
-
+    print(args)
     if args.testing:
         print(f'Testing mode enabled. Using dataset: {args.dataset_test}, model: {args.model} weights: {args.weights}, output directory: {args.output}')
         # Add testing logic here
@@ -53,7 +54,7 @@ def main():
         print(f'Training parameters - num_workers: {args.num_workers}, batch_size: {args.batch_size}, seed: {args.seed}, max_epochs: {args.max_epochs}, input_size: {args.input_size}')
         # Add training logic here
         if args.model == "SimCLR":
-            train_sim_clr(args.num_workers,args.batch_size,args.weights_file,args.dataset_train,args.seed,args.max_epochs,args.input_size,)
+            train_sim_clr(args.num_workers,args.batch_size,args.weights_file,args.dataset_train,args.seed,args.max_epochs,args.input_size,args.validate)
         else:
             raise NotImplementedError("Have not implemented training for DINO yet")
 

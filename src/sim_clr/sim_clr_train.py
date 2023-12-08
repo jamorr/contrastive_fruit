@@ -6,7 +6,9 @@ import torchvision
 
 from lightly.data import LightlyDataset
 from lightly.transforms import SimCLRTransform, utils
+from torch.utils.data import random_split
 
+import matplotlib.pyplot as plt
 
 def train_sim_clr(
     num_workers,
@@ -16,7 +18,7 @@ def train_sim_clr(
     seed,
     max_epochs,
     input_size,
-    path_to_validation=None
+    validate
 ):
     pl.seed_everything(seed)
 
@@ -26,46 +28,62 @@ def train_sim_clr(
     # training
 
 
-    dataset_train_simclr = LightlyDataset(input_dir=path_to_data, transform=transform)
+    train_set = LightlyDataset(input_dir=path_to_data, transform=transform)
+    # use 20% of training data for validation
+   
 
-    dataloader_train_simclr = torch.utils.data.DataLoader(
-        dataset_train_simclr,
-        batch_size=batch_size,
-        shuffle=True,
-        drop_last=True,
-        num_workers=num_workers,
-    )
-
+    
     model = SimCLRModel(max_epochs)
-    if path_to_validation is not None:
-        test_transform = torchvision.transforms.Compose(
-        [
-            torchvision.transforms.Resize((input_size, input_size)),
-            torchvision.transforms.ToTensor(),
-            torchvision.transforms.Normalize(
-                mean=utils.IMAGENET_NORMALIZE["mean"],
-                std=utils.IMAGENET_NORMALIZE["std"],
-            ),
-        ]
-        )
-        dataset_test = LightlyDataset(input_dir=path_to_data, transform=test_transform)
+    if validate:
+        train_set_size = int(len(train_set) * 0.8)
+        valid_set_size = len(train_set) - train_set_size
+
+        # split the train set into two
+        seed = torch.Generator().manual_seed(42)
+        train_set, valid_set = random_split(train_set, [train_set_size, valid_set_size], generator=seed)
+
+
         dataloader_validation = torch.utils.data.DataLoader(
-            dataset_test,
+            valid_set,
             batch_size=batch_size,
             shuffle=False,
             drop_last=False,
             num_workers=num_workers,
         )
-        callback = LossLoggingCallback()
+        dataloader_train_simclr = torch.utils.data.DataLoader(
+            train_set,
+            batch_size=batch_size,
+            shuffle=True,
+            drop_last=True,
+            num_workers=num_workers,
+        )
+        # callback = LossLoggingCallback()
         trainer = pl.Trainer(
             max_epochs=max_epochs,
-            callbacks=[callback],
+            # callbacks=[callback],
             devices=1,
             accelerator="auto",
             log_every_n_steps=1,
         )
         trainer.fit(model, dataloader_train_simclr, dataloader_validation)
+        # fig, ax = plt.subplots(1,1)
+        # train_loss = callback.train_losses
+        # val_loss = callback.val_losses
+        # epochs = range(len(train_loss))
+        # ax.plot(epochs, train_loss)
+        # ax.plot(epochs, val_loss)
+        # ax.set_title(f"{path_to_weights} loss")
+        # ax.set_xlabel("Epoch")
+        # ax.set_ylabel("Loss")
+        # plt.savefig(f'app/loss/{path_to_weights}.png')
     else:
+        dataloader_train_simclr = torch.utils.data.DataLoader(
+            train_set,
+            batch_size=batch_size,
+            shuffle=True,
+            drop_last=True,
+            num_workers=num_workers,
+        )
         trainer = pl.Trainer(
             max_epochs=max_epochs,
             devices=1,
