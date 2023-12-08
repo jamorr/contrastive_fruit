@@ -22,6 +22,7 @@ def parse_args():
 
     # Model and dataset parameters
     parser.add_argument('--dataset_train', type=str, default=path_to_data, help='Path to training dataset to use')
+    parser.add_argument('--dataset_valid', type=str, default=path_to_data, help='Path to validation dataset to use')
     parser.add_argument('--dataset_test', type=str, default=path_to_data, help='Path to testing dataset to use')
     parser.add_argument('--model', type=str, default="SimCLR", help='Model to use')
 
