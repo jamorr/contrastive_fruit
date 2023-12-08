@@ -13,10 +13,10 @@ from lightly.data import LightlyDataset
 from lightly.transforms import utils
 
 
-from sim_clr import SimCLRModel, generate_embeddings
+from sim_clr.sim_clr_model import SimCLRModel, generate_embeddings
 
-path_to_weights = '../../models/sim_clr_res18_e(100)_mango.pth'
-path_to_data = "../../fruit/lemon-dataset/images/"
+# path_to_weights = '../../models/sim_clr_res18_e(100)_mango.pth'
+# path_to_data = "../../fruit/lemon-dataset/images/"
 
 def get_image_as_np_array(filename: str):
     """Returns an image as an numpy array"""
@@ -24,7 +24,7 @@ def get_image_as_np_array(filename: str):
     return np.asarray(img)
 
 
-def plot_knn_examples(embeddings, filenames, results_dir, n_neighbors=3, num_examples=6):
+def plot_knn_examples(embeddings, filenames, results_dir, path_to_weights, path_to_data, n_neighbors=3, num_examples=6):
     """Plots multiple rows of random images with their nearest neighbors"""
     # lets look at the nearest neighbors for some samples
     # we use the sklearn library
@@ -116,9 +116,9 @@ def run_self_supervised_testing(args):
     )
 
     model = SimCLRModel()
-    model.load_state_dict(torch.load(args.path_to_weights))
+    model.load_state_dict(torch.load(args.weights))
     model.eval()
 
     embeddings, filenames = generate_embeddings(model, dataloader_test)
 
-    plot_knn_examples(embeddings, filenames, args.output)
+    plot_knn_examples(embeddings, filenames, args.output, args.weights, args.dataset_test)

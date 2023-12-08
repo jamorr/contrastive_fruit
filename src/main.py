@@ -3,8 +3,8 @@ import pathlib
 from sim_clr.sim_clr_test import run_self_supervised_testing
 from sim_clr.sim_clr_train import train_sim_clr
 
-path_to_data = "../fruit/Dataset/Grading_dataset"
-path_to_weights = '../models/sim_clr_res18_e(50)_256x256_mango.pth'
+path_to_data = "../../fruit/Dataset/Grading_dataset"
+path_to_weights = '../../models/sim_clr_res18_e(50)_256x256_mango.pth'
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Self-supervised learning model training and testing')

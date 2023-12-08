@@ -1,4 +1,4 @@
-from sim_clr_model import SimCLRModel
+from sim_clr.sim_clr_model import SimCLRModel
 
 import pytorch_lightning as pl
 import torch

@@ -1,0 +1,33 @@
+{
+    "1103": [
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\Lemon\\images\\0011_A_V_60_C.jpg",
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\Lemon\\images\\0011_A_V_75_C.jpg",
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\Lemon\\images\\0010_A_V_105_C.jpg"
+    ],
+    "2182": [
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\Lemon\\images\\0021_G_H_60_F.jpg",
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\Lemon\\images\\0021_G_H_45_F.jpg",
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\Lemon\\images\\0013_G_H_105_F.jpg"
+    ],
+    "2229": [
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\Lemon\\images\\0022_F_I_120_A.jpg",
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\Lemon\\images\\0022_F_I_105_A.jpg",
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\Lemon\\images\\0022_F_I_90_A.jpg"
+    ],
+    "2302": [
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\Lemon\\images\\0023_F_I_150_A.jpg",
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\Lemon\\images\\0023_F_I_165_A.jpg",
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\Lemon\\images\\0023_F_I_135_A.jpg"
+    ],
+    "252": [
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\Lemon\\images\\0003_B_H_30_G.jpg",
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\Lemon\\images\\0003_B_H_15_G.jpg",
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\Lemon\\images\\0024_F_H_60_A.jpg"
+    ],
+    "947": [
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\Lemon\\images\\0009_A_H_0_C.jpg",
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\Lemon\\images\\0009_A_H_15_C.jpg",
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\Lemon\\images\\0009_A_H_30_C.jpg"
+    ],
+    "model": "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\models\\sim_clr_res18_e(500)_mango.pth"
+}
