@@ -1,0 +1,33 @@
+{
+    "1461": [
+        "../fruit/lemon-dataset/images/0015_A_V_120_D.jpg",
+        "../fruit/lemon-dataset/images/0015_A_V_150_D.jpg",
+        "../fruit/lemon-dataset/images/0015_A_V_165_D.jpg"
+    ],
+    "1629": [
+        "../fruit/lemon-dataset/images/0016_C_I_30_F.jpg",
+        "../fruit/lemon-dataset/images/0016_C_I_45_F.jpg",
+        "../fruit/lemon-dataset/images/0020_C_I_45_F.jpg"
+    ],
+    "183": [
+        "../fruit/lemon-dataset/images/0002_F_H_75_C.jpg",
+        "../fruit/lemon-dataset/images/0021_A_H_135_A.jpg",
+        "../fruit/lemon-dataset/images/0002_F_H_90_C.jpg"
+    ],
+    "2282": [
+        "../fruit/lemon-dataset/images/0023_C_H_120_G.jpg",
+        "../fruit/lemon-dataset/images/0023_C_H_135_G.jpg",
+        "../fruit/lemon-dataset/images/0023_F_H_105_A.jpg"
+    ],
+    "781": [
+        "../fruit/lemon-dataset/images/0006_A_I_150_C.jpg",
+        "../fruit/lemon-dataset/images/0006_A_I_165_C.jpg",
+        "../fruit/lemon-dataset/images/0006_A_I_120_C.jpg"
+    ],
+    "802": [
+        "../fruit/lemon-dataset/images/0006_A_V_60_D.jpg",
+        "../fruit/lemon-dataset/images/0012_A_V_45_D.jpg",
+        "../fruit/lemon-dataset/images/0012_A_V_75_D.jpg"
+    ],
+    "model": "../models/sim_clr_res18_e(100)_mango.pth"
+}
