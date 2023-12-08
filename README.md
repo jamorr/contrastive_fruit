@@ -1,6 +1,6 @@
 # Contrastive learning on lemons dataset using Lightly Self-Supervised learning
 ## Usage Instructions
-Reccomended hardware required to run:
+Reccomended hardware required to run:  
 A computer with:
 - hardware virtualization enabled and Docker installed
 - ~17GB of available storage
