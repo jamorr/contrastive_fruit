@@ -161,3 +161,4 @@ cython_debug/
 data
 deephs_fruit
 .venv
+src/contrastive_model_0.pth
