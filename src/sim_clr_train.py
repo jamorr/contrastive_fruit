@@ -22,14 +22,14 @@ from lightly.models.modules.heads import SimCLRProjectionHead
 num_workers = 8
 batch_size = 256
 seed = 1
-max_epochs = 500
-input_size = 128
+max_epochs = 50
+input_size = 256
 num_ftrs = 32
 
 pl.seed_everything(seed)
 
 path_to_data = "../fruit/Dataset/Grading_dataset"
-path_to_weights = '../models/sim_clr_res18_e(500)_mango.pth'
+path_to_weights = '../models/sim_clr_res18_e(50)_256x256_mango.pth'
 
 transform = SimCLRTransform(input_size=input_size, vf_prob=0.5, rr_prob=0.5)
 
