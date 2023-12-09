@@ -9,7 +9,7 @@ import torch
 import torchvision
 from PIL import Image
 from sklearn.neighbors import NearestNeighbors
-from sklearn.metrics import ConfusionMatrixDisplay
+from sklearn.metrics import ConfusionMatrixDisplay, f1_score, classification_report
 
 from lightly.data import LightlyDataset
 from lightly.transforms import utils
@@ -28,36 +28,25 @@ def get_image_as_np_array(filename: str):
 def get_knn_accuracy(
     embeddings,
     filenames,
-    results_dir,
+    res_folder,
     n_neighbors=5,
 ):
     """Collects predictions made by KNN into a json file"""
+
     # lets look at the nearest neighbors for some samples
     # we use the sklearn library
     nbrs = NearestNeighbors(n_neighbors=n_neighbors).fit(embeddings)
-    neigh = nbrs.kneighbors(embeddings)
-    try:
-        save_dir = (
-            max(
-                [
-                    int(d)
-                    for d in os.listdir(results_dir)
-                    if os.path.isdir(results_dir / str(d))
-                ]
-            )
-            + 1
-        )
-    except:
-        save_dir = 0
-    res_folder = pathlib.Path(f"../results/{save_dir}")
+    dist, idxs = nbrs.kneighbors(embeddings)
     predictions = []
-    for ns in neigh:
-        _, true_idx = ns[0]
-        ground_truth = pathlib.Path(filenames[true_idx]).parent
+    for ns in zip(dist, idxs):
+        all_ns = list(zip(*ns))
+        _, true_idx = all_ns[0]
+        ground_truth = pathlib.Path(filenames[int(true_idx)]).parent.as_posix()
         pred_i = defaultdict(int)
         pred_d = defaultdict(int)
-        for d, i in ns[1:]:
-            p = pathlib.Path(filenames[i]).parent  # noqa: F821
+        for d, i in all_ns[1:]:
+            p = pathlib.Path(filenames[int(i)]).parent.as_posix()
+
             pred_d[p] += 1 / (d**2)
             pred_i[p] += 1
         i_prediction = max(pred_i, key=pred_i.get)
@@ -88,20 +77,26 @@ def get_knn_accuracy(
         y_pred_d,
         normalize="true",
         cmap="Blues",
+        colorbar=False
     )
-    cm_d.figure_.savefig(results_dir/"distance_confusion.png")
+    cm_d.figure_.savefig(res_folder/"distance_confusion.png", bbox_inches="tight")
     cm_i = ConfusionMatrixDisplay.from_predictions(
         y_true,
         y_pred_i,
         normalize="true",
         cmap="Blues",
+        colorbar=False
     )
-    cm_i.figure_.savefig(results_dir/"voting_confusion.png")
+    cm_i.figure_.savefig(res_folder/"voting_confusion.png", bbox_inches="tight")
+    print()
     print(
         f"""
 k                            {n_neighbors}
-Distance weighted accuracy   {acc_d*100:.2f}%
-Voting accuracy              {acc_i*100:.2f}%"""
+Distance weighted
+    {classification_report(y_true, y_pred_d)}
+Unweighted
+    {classification_report(y_true, y_pred_i)}
+"""
     )
 
 
@@ -119,20 +114,7 @@ def plot_knn_examples(
     # we use the sklearn library
     nbrs = NearestNeighbors(n_neighbors=n_neighbors).fit(embeddings)
     distances, indices = nbrs.kneighbors(embeddings)
-    try:
-        save_dir = (
-            max(
-                [
-                    int(d)
-                    for d in os.listdir(results_dir)
-                    if os.path.isdir(results_dir / str(d))
-                ]
-            )
-            + 1
-        )
-    except:
-        save_dir = 0
-    os.makedirs(f"../results/{save_dir}")
+
     # get 5 random samples
     samples_idx = np.random.choice(len(indices), size=num_examples, replace=False)
     annotations = {}
@@ -154,11 +136,11 @@ def plot_knn_examples(
             ax.set_title(f"d={distances[idx][plot_x_offset]:.3f}")
             # let's disable the axis
             plt.axis("off")
-        plt.savefig(f"../results/{save_dir}/knn_{idx}.png")
+        plt.savefig(results_dir/f"knn_{idx}.png", bbox_inches="tight")
         annotations[str(idx)] = files
     # Dump annotations
     data = json.dumps(annotations, indent=4, sort_keys=True)
-    with open(f"../results/{save_dir}/annotations.json", "w") as f:
+    with open(results_dir/"annotations.json", "w") as f:
         f.write(data)
 
 
@@ -186,16 +168,34 @@ def run_self_supervised_testing(args):
         drop_last=False,
         num_workers=args.num_workers,
     )
+    try:
+        model = SimCLRModel()
+        model.load_state_dict(torch.load(args.weights))
+    except RuntimeError:
+        model = SimCLRModel.load_from_checkpoint(args.weights, map_location=torch.device("cpu"))
 
-    model = SimCLRModel()
-    model.load_state_dict(torch.load(args.weights))
     model.eval()
 
     embeddings, filenames = generate_embeddings(model, dataloader_test)
-
+    results_dir = args.output
+    try:
+        save_dir = (
+            max(
+                [
+                    int(d)
+                    for d in os.listdir(results_dir)
+                    if os.path.isdir(results_dir / str(d))
+                ]
+            )
+            + 1
+        )
+    except:
+        save_dir = 0
+    res_path = results_dir / str(save_dir)
+    os.makedirs(res_path)
     plot_knn_examples(
-        embeddings, filenames, args.output, args.weights, args.dataset_test
+        embeddings, filenames, res_path, args.weights, args.dataset_test
     )
     get_knn_accuracy(
-        embeddings, filenames, args.output
+        embeddings, filenames, res_path
     )

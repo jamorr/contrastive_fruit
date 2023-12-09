@@ -25,7 +25,7 @@ def parse_args():
     parser.add_argument('--dataset_train', type=str, default=path_to_data, help='Path to training dataset to use')
     parser.add_argument('--dataset_test', type=str, default=path_to_data, help='Path to testing dataset to use')
     parser.add_argument('--model', type=str, default="SimCLR", help='Model to use')
-    
+
 
     # Testing mode
     parser.add_argument('--testing', action='store_true', help='Enable testing mode (ignore other training args)')
@@ -39,7 +39,7 @@ def parse_args():
 
 def main():
     args = parse_args()
-    print(args)
+    # print(args)
     if args.testing:
         print(f'Testing mode enabled. Using dataset: {args.dataset_test}, model: {args.model} weights: {args.weights}, output directory: {args.output}')
         # Add testing logic here
