@@ -28,3 +28,5 @@ To train the model, navigate to app/src in the container and run
 To test a model, navigate to app/src in the container and run
 `python3 main.py --dataset_test <path to testing dataset (directory)> --weights <file with model weights> --testing`
 currently this is only implemented for SimCLR so do not use for DINO weights.
+
+The results seen in the paper can be found in the results folder.
