@@ -9,6 +9,7 @@ import torch
 import torchvision
 from PIL import Image
 from sklearn.neighbors import NearestNeighbors
+from sklearn.metrics import ConfusionMatrixDisplay
 
 from lightly.data import LightlyDataset
 from lightly.transforms import utils
@@ -16,8 +17,6 @@ from lightly.transforms import utils
 
 from sim_clr.sim_clr_model import SimCLRModel, generate_embeddings
 
-# path_to_weights = '../../models/sim_clr_res18_e(100)_mango.pth'
-# path_to_data = "../../fruit/lemon-dataset/images/"
 
 
 def get_image_as_np_array(filename: str):
@@ -25,16 +24,14 @@ def get_image_as_np_array(filename: str):
     img = Image.open(filename)
     return np.asarray(img)
 
+
 def get_knn_accuracy(
     embeddings,
     filenames,
     results_dir,
-    path_to_weights,
-    path_to_data,
     n_neighbors=5,
-    num_examples=6,
 ):
-    """Plots multiple rows of random images with their nearest neighbors"""
+    """Collects predictions made by KNN into a json file"""
     # lets look at the nearest neighbors for some samples
     # we use the sklearn library
     nbrs = NearestNeighbors(n_neighbors=n_neighbors).fit(embeddings)
@@ -52,7 +49,7 @@ def get_knn_accuracy(
         )
     except:
         save_dir = 0
-    res_folder = f"../results/{save_dir}"
+    res_folder = pathlib.Path(f"../results/{save_dir}")
     predictions = []
     for ns in neigh:
         _, true_idx = ns[0]
@@ -61,27 +58,53 @@ def get_knn_accuracy(
         pred_d = defaultdict(int)
         for d, i in ns[1:]:
             p = pathlib.Path(filenames[i]).parent  # noqa: F821
-            pred_d[p] += 1/(d**2)
+            pred_d[p] += 1 / (d**2)
             pred_i[p] += 1
         i_prediction = max(pred_i, key=pred_i.get)
         d_w_prediction = max(pred_d, key=pred_d.get)
         predictions.append(
             {
-                "neighbors":pred_i,
-                "distance_weighted":pred_d,
-                "i_prediction":max(pred_i, key=pred_i.get),
-                "d_w_prediction":max(pred_d, key=pred_d.get),
-                "correct_i":i_prediction==ground_truth,
-                "correct_d":d_w_prediction==ground_truth,
-                
-                }
-            ) 
-    acc_d = sum([p["correct_d"] for p in predictions])/len(predictions)   
-    acc_i = sum([p["correct_i"] for p in predictions])/len(predictions)   
+                "neighbors": pred_i,
+                "distance_weighted": pred_d,
+                "gt": ground_truth,
+                "i_prediction": max(pred_i, key=pred_i.get),
+                "d_w_prediction": max(pred_d, key=pred_d.get),
+                "correct_i": i_prediction == ground_truth,
+                "correct_d": d_w_prediction == ground_truth,
+            }
+        )
+    acc_d = sum([p["correct_d"] for p in predictions]) / len(predictions)
+    acc_i = sum([p["correct_i"] for p in predictions]) / len(predictions)
     data = json.dumps(predictions, indent=4)
-    with open(f"../results/{save_dir}/predictions_{round(acc_d*100)}_{round(acc_i*100)}.json", "w") as f:
+    with open(
+        res_folder / f"predictions_{round(acc_d*100)}_{round(acc_i*100)}.json", "w"
+    ) as f:
         f.write(data)
-    
+    y_true = [p["gt"] for p in predictions]
+    y_pred_d = [p["d_w_prediction"] for p in predictions]
+    y_pred_i = [p["i_prediction"] for p in predictions]
+    cm_d = ConfusionMatrixDisplay.from_predictions(
+        y_true,
+        y_pred_d,
+        normalize="true",
+        cmap="Blues",
+    )
+    cm_d.figure_.savefig(results_dir/"distance_confusion.png")
+    cm_i = ConfusionMatrixDisplay.from_predictions(
+        y_true,
+        y_pred_i,
+        normalize="true",
+        cmap="Blues",
+    )
+    cm_i.figure_.savefig(results_dir/"voting_confusion.png")
+    print(
+        f"""
+k                            {n_neighbors}
+Distance weighted accuracy   {acc_d*100:.2f}%
+Voting accuracy              {acc_i*100:.2f}%"""
+    )
+
+
 def plot_knn_examples(
     embeddings,
     filenames,
@@ -174,6 +197,5 @@ def run_self_supervised_testing(args):
         embeddings, filenames, args.output, args.weights, args.dataset_test
     )
     get_knn_accuracy(
-        embeddings, filenames, args.output, args.weights, args.dataset_test
+        embeddings, filenames, args.output
     )
-
