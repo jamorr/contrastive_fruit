@@ -1,3 +1,4 @@
+import PIL
 import pytorch_lightning as pl
 import torch
 import torch.nn as nn
@@ -67,7 +68,7 @@ class SimCLRModel(pl.LightningModule):
     def on_validation_epoch_end(self):
         avg_validation_loss = self.validation_loss / self.validation_set_size
         self.log("val_loss_ssl", avg_validation_loss)
-        self.validation_set_size = 0
+        # self.validation_set_size = 0
         
 
     def configure_optimizers(self):
@@ -77,7 +78,6 @@ class SimCLRModel(pl.LightningModule):
         scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optim, self.max_epochs)
         return [optim], [scheduler]
     
-
 
 def generate_embeddings(model, dataloader):
     """Generates representations for all images in the dataloader with

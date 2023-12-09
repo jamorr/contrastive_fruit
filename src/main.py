@@ -3,17 +3,17 @@ import pathlib
 from sim_clr.sim_clr_test import run_self_supervised_testing
 from sim_clr.sim_clr_train import train_sim_clr
 
-path_to_data = "/app/fruit/lemon-dataset/images"
+path_to_data = "/app/fruit/lemon_dataset"
 path_to_weights_test = '/app/models/sim_clr_res18_e(50)_256x256_lemon.pth'
-path_to_weights_train = '/app/models/sim_clr_res18_e(100)_256x256_lemon.pth'
+path_to_weights_train = '/app/models/sim_clr_res18_e(1000)_256x256_lemon_d.pth'
 def parse_args():
     parser = argparse.ArgumentParser(description='Self-supervised learning model training and testing')
 
     # Training parameters
-    parser.add_argument('--num_workers', type=int, default=8, help='Number of workers for data loading')
+    parser.add_argument('--num_workers', type=int, default=4, help='Number of workers for data loading')
     parser.add_argument('--batch_size', type=int, default=128, help='Batch size for training')
     parser.add_argument('--seed', type=int, default=1, help='Random seed for reproducibility')
-    parser.add_argument('--max_epochs', type=int, default=100, help='Maximum number of training epochs')
+    parser.add_argument('--max_epochs', type=int, default=1000, help='Maximum number of training epochs')
     parser.add_argument('--input_size', type=int, default=256, help='Input size for the model')
     parser.add_argument('--validate', action='store_true', help='Create validation dataset to use')
 

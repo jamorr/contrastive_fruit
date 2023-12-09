@@ -1,3 +1,4 @@
+import os
 from sim_clr.sim_clr_model import LossLoggingCallback, SimCLRModel
 
 import pytorch_lightning as pl
@@ -9,6 +10,23 @@ from lightly.transforms import SimCLRTransform, utils
 from torch.utils.data import random_split
 
 import matplotlib.pyplot as plt
+
+import pandas as pd   
+
+def plot_validation_loss(logs_directory):
+    path_to_metrics = os.path.join(logs_directory, 'metrics.csv')
+    df = pd.read_csv(path_to_metrics)
+    df.ffill(inplace=True)
+    df.drop_duplicates("epoch", keep="last",inplace=True)
+    df.set_index("epoch", inplace=True)
+    df.drop("step", axis="columns",inplace=True)
+    df.plot()
+    plt.ylabel("Loss")
+    plt.xlabel("Epoch")
+    plt.legend(['Training', 'Validation'])
+    plt.savefig(os.path.join(logs_directory, 'loss.png'))
+
+
 
 def train_sim_clr(
     num_workers,
@@ -63,19 +81,10 @@ def train_sim_clr(
             # callbacks=[callback],
             devices=1,
             accelerator="auto",
-            log_every_n_steps=1,
+            log_every_n_steps=12,
         )
         trainer.fit(model, dataloader_train_simclr, dataloader_validation)
-        # fig, ax = plt.subplots(1,1)
-        # train_loss = callback.train_losses
-        # val_loss = callback.val_losses
-        # epochs = range(len(train_loss))
-        # ax.plot(epochs, train_loss)
-        # ax.plot(epochs, val_loss)
-        # ax.set_title(f"{path_to_weights} loss")
-        # ax.set_xlabel("Epoch")
-        # ax.set_ylabel("Loss")
-        # plt.savefig(f'app/loss/{path_to_weights}.png')
+        plot_validation_loss(trainer.logger.log_dir)
     else:
         dataloader_train_simclr = torch.utils.data.DataLoader(
             train_set,
