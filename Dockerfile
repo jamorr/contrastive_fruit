@@ -19,7 +19,7 @@ RUN python3 -m pip install -r requirements.txt
 RUN python3 -m pip install --upgrade pip
 
 # Install PyTorch and torchvision
-RUN pip3 install lightly torch torchvision torchaudio matplotlib scikit-learn
+RUN pip3 install lightly torch torchvision torchaudio matplotlib scikit-learn pandas
 
 # Set the working directory
 WORKDIR /app

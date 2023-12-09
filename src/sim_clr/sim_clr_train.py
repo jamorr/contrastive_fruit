@@ -40,7 +40,7 @@ def train_sim_clr(
 ):
     pl.seed_everything(seed)
 
-    transform = SimCLRTransform(input_size=input_size, vf_prob=0.5, rr_prob=0.5)
+    transform = SimCLRTransform(input_size=input_size, vf_prob=0.5,hf_prob=0.5, rr_prob=0.5)
 
     # We create a torchvision transformation for embedding the dataset after
     # training
