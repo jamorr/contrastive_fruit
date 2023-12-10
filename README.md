@@ -29,4 +29,4 @@ To test a model, navigate to app/src in the container and run
 `python3 main.py --dataset_test <path to testing dataset (directory)> --weights <file with model weights> --testing`
 currently this is only implemented for SimCLR so do not use for DINO weights.
 
-The results seen in the paper can be found in the results folder.
+The results seen in the paper can be found in the results folder. The model and dataset used to produce results are found inside `annotations.json`. Some examples of KNN neighbors and the confusion matrix are also available.
