@@ -1,0 +1,45 @@
+{
+    "130": [
+        "/app/fruit/Dataset/Grading_dataset/Class_I/IMG_20210703_153508.jpg",
+        "/app/fruit/Dataset/Grading_dataset/Class_I/IMG_20210703_153235.jpg",
+        "/app/fruit/Dataset/Grading_dataset/Class_I/IMG_20210703_154318.jpg",
+        "/app/fruit/Dataset/Grading_dataset/Class_I/IMG_20210703_152017.jpg",
+        "/app/fruit/Dataset/Grading_dataset/Class_I/IMG_20210703_152503.jpg"
+    ],
+    "145": [
+        "/app/fruit/Dataset/Grading_dataset/Class_I/IMG_20210703_153736.jpg",
+        "/app/fruit/Dataset/Grading_dataset/Class_I/IMG_20210703_153732.jpg",
+        "/app/fruit/Dataset/Grading_dataset/Class_II/IMG_20210703_155840.jpg",
+        "/app/fruit/Dataset/Grading_dataset/Class_II/IMG_20210703_161343.jpg",
+        "/app/fruit/Dataset/Grading_dataset/Class_I/IMG_20210703_153322.jpg"
+    ],
+    "316": [
+        "/app/fruit/Dataset/Grading_dataset/Class_II/IMG_20210703_160919.jpg",
+        "/app/fruit/Dataset/Grading_dataset/Class_II/IMG_20210703_161215.jpg",
+        "/app/fruit/Dataset/Grading_dataset/Class_II/IMG_20210703_160915.jpg",
+        "/app/fruit/Dataset/Grading_dataset/Class_II/IMG_20210703_161210.jpg",
+        "/app/fruit/Dataset/Grading_dataset/Class_I/IMG_20210703_152950.jpg"
+    ],
+    "351": [
+        "/app/fruit/Dataset/Grading_dataset/Class_II/IMG_20210703_161247.jpg",
+        "/app/fruit/Dataset/Grading_dataset/Class_II/IMG_20210703_161243.jpg",
+        "/app/fruit/Dataset/Grading_dataset/Class_II/IMG_20210703_161250.jpg",
+        "/app/fruit/Dataset/Grading_dataset/Class_II/IMG_20210703_161353.jpg",
+        "/app/fruit/Dataset/Grading_dataset/Class_II/IMG_20210703_161743.jpg"
+    ],
+    "377": [
+        "/app/fruit/Dataset/Grading_dataset/Class_II/IMG_20210703_161540.jpg",
+        "/app/fruit/Dataset/Grading_dataset/Class_II/IMG_20210703_161532.jpg",
+        "/app/fruit/Dataset/Grading_dataset/Class_II/IMG_20210703_161523.jpg",
+        "/app/fruit/Dataset/Grading_dataset/Class_II/IMG_20210703_161007.jpg",
+        "/app/fruit/Dataset/Grading_dataset/Class_II/IMG_20210703_161550.jpg"
+    ],
+    "406": [
+        "/app/fruit/Dataset/Grading_dataset/Extra_Class/IMG_20210703_142552.jpg",
+        "/app/fruit/Dataset/Grading_dataset/Class_I/IMG_20210703_152059.jpg",
+        "/app/fruit/Dataset/Grading_dataset/Extra_Class/IMG_20210703_144926.jpg",
+        "/app/fruit/Dataset/Grading_dataset/Extra_Class/IMG_20210703_144930.jpg",
+        "/app/fruit/Dataset/Grading_dataset/Extra_Class/IMG_20210703_145125.jpg"
+    ],
+    "model": "/app/models/sim_clr_res18_e(1000)_256x256_lemon_d.pth"
+}
