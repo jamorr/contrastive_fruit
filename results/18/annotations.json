@@ -1,0 +1,45 @@
+{
+    "1473": [
+        "/app/fruit/lemon_dataset/good_quality/good_quality_456.jpg",
+        "/app/fruit/lemon_dataset/good_quality/good_quality_449.jpg",
+        "/app/fruit/lemon_dataset/good_quality/good_quality_442.jpg",
+        "/app/fruit/lemon_dataset/good_quality/good_quality_373.jpg",
+        "/app/fruit/lemon_dataset/good_quality/good_quality_223.jpg"
+    ],
+    "187": [
+        "/app/fruit/lemon_dataset/bad_quality/bad_quality_267.jpg",
+        "/app/fruit/lemon_dataset/bad_quality/bad_quality_278.jpg",
+        "/app/fruit/lemon_dataset/bad_quality/bad_quality_758.jpg",
+        "/app/fruit/lemon_dataset/bad_quality/bad_quality_196.jpg",
+        "/app/fruit/lemon_dataset/bad_quality/bad_quality_581.jpg"
+    ],
+    "1875": [
+        "/app/fruit/lemon_dataset/good_quality/good_quality_818.jpg",
+        "/app/fruit/lemon_dataset/good_quality/good_quality_971.jpg",
+        "/app/fruit/lemon_dataset/good_quality/good_quality_706.jpg",
+        "/app/fruit/lemon_dataset/good_quality/good_quality_970.jpg",
+        "/app/fruit/lemon_dataset/good_quality/good_quality_860.jpg"
+    ],
+    "452": [
+        "/app/fruit/lemon_dataset/bad_quality/bad_quality_505.jpg",
+        "/app/fruit/lemon_dataset/bad_quality/bad_quality_507.jpg",
+        "/app/fruit/lemon_dataset/bad_quality/bad_quality_527.jpg",
+        "/app/fruit/lemon_dataset/bad_quality/bad_quality_629.jpg",
+        "/app/fruit/lemon_dataset/bad_quality/bad_quality_460.jpg"
+    ],
+    "499": [
+        "/app/fruit/lemon_dataset/bad_quality/bad_quality_548.jpg",
+        "/app/fruit/lemon_dataset/bad_quality/bad_quality_772.jpg",
+        "/app/fruit/lemon_dataset/bad_quality/bad_quality_308.jpg",
+        "/app/fruit/lemon_dataset/bad_quality/bad_quality_762.jpg",
+        "/app/fruit/lemon_dataset/bad_quality/bad_quality_741.jpg"
+    ],
+    "691": [
+        "/app/fruit/lemon_dataset/bad_quality/bad_quality_720.jpg",
+        "/app/fruit/lemon_dataset/bad_quality/bad_quality_932.jpg",
+        "/app/fruit/lemon_dataset/bad_quality/bad_quality_684.jpg",
+        "/app/fruit/lemon_dataset/bad_quality/bad_quality_468.jpg",
+        "/app/fruit/lemon_dataset/bad_quality/bad_quality_231.jpg"
+    ],
+    "model": "/app/models/sim_clr_res18_e(1000)_256x256_lemon_d.pth"
+}
