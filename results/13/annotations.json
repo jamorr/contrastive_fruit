@@ -1,0 +1,45 @@
+{
+    "167": [
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\Dataset\\Grading_dataset\\Class I\\IMG_20210703_154148.jpg",
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\Dataset\\Grading_dataset\\Class I\\IMG_20210703_154015.jpg",
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\Dataset\\Grading_dataset\\Class I\\IMG_20210703_152231.jpg",
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\Dataset\\Grading_dataset\\Class I\\IMG_20210703_154042.jpg",
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\Dataset\\Grading_dataset\\Class I\\IMG_20210703_154018.jpg"
+    ],
+    "246": [
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\Dataset\\Grading_dataset\\Class II\\IMG_20210703_160206.jpg",
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\Dataset\\Grading_dataset\\Class II\\IMG_20210703_161725.jpg",
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\Dataset\\Grading_dataset\\Class II\\IMG_20210703_160137.jpg",
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\Dataset\\Grading_dataset\\Class II\\IMG_20210703_161709.jpg",
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\Dataset\\Grading_dataset\\Class II\\IMG_20210703_155906.jpg"
+    ],
+    "281": [
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\Dataset\\Grading_dataset\\Class II\\IMG_20210703_160537.jpg",
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\Dataset\\Grading_dataset\\Class II\\IMG_20210703_160539.jpg",
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\Dataset\\Grading_dataset\\Class II\\IMG_20210703_160520.jpg",
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\Dataset\\Grading_dataset\\Class II\\IMG_20210703_160753.jpg",
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\Dataset\\Grading_dataset\\Class II\\IMG_20210703_160523.jpg"
+    ],
+    "301": [
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\Dataset\\Grading_dataset\\Class II\\IMG_20210703_160738.jpg",
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\Dataset\\Grading_dataset\\Class II\\IMG_20210703_155902.jpg",
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\Dataset\\Grading_dataset\\Class II\\IMG_20210703_155858.jpg",
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\Dataset\\Grading_dataset\\Class II\\IMG_20210703_161054.jpg",
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\Dataset\\Grading_dataset\\Class II\\IMG_20210703_160746.jpg"
+    ],
+    "330": [
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\Dataset\\Grading_dataset\\Class II\\IMG_20210703_161045.jpg",
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\Dataset\\Grading_dataset\\Class II\\IMG_20210703_161049.jpg",
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\Dataset\\Grading_dataset\\Class II\\IMG_20210703_161054.jpg",
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\Dataset\\Grading_dataset\\Class II\\IMG_20210703_161058.jpg",
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\Dataset\\Grading_dataset\\Class II\\IMG_20210703_161101.jpg"
+    ],
+    "418": [
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\Dataset\\Grading_dataset\\Extra Class\\IMG_20210703_142811.jpg",
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\Dataset\\Grading_dataset\\Extra Class\\IMG_20210703_143931.jpg",
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\Dataset\\Grading_dataset\\Extra Class\\IMG_20210703_143229.jpg",
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\Dataset\\Grading_dataset\\Extra Class\\IMG_20210703_143859.jpg",
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\Dataset\\Grading_dataset\\Extra Class\\IMG_20210703_143927.jpg"
+    ],
+    "model": "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\models\\sim_clr_res18_e(256)_lemon_d.pth"
+}

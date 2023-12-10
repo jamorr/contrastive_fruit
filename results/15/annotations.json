@@ -1,0 +1,45 @@
+{
+    "1084": [
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\lemon_dataset\\Good Quality\\good_quality_1117.jpg",
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\lemon_dataset\\Good Quality\\good_quality_419.jpg",
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\lemon_dataset\\Good Quality\\good_quality_52.jpg",
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\lemon_dataset\\Good Quality\\good_quality_51.jpg",
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\lemon_dataset\\Good Quality\\good_quality_357.jpg"
+    ],
+    "1280": [
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\lemon_dataset\\Good Quality\\good_quality_282.jpg",
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\lemon_dataset\\Good Quality\\good_quality_360.jpg",
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\lemon_dataset\\Good Quality\\good_quality_537.jpg",
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\lemon_dataset\\Good Quality\\good_quality_46.jpg",
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\lemon_dataset\\Good Quality\\good_quality_238.jpg"
+    ],
+    "1560": [
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\lemon_dataset\\Good Quality\\good_quality_534.jpg",
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\lemon_dataset\\Good Quality\\good_quality_680.jpg",
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\lemon_dataset\\Good Quality\\good_quality_535.jpg",
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\lemon_dataset\\Good Quality\\good_quality_677.jpg",
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\lemon_dataset\\Good Quality\\good_quality_536.jpg"
+    ],
+    "546": [
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\lemon_dataset\\Bad Quality\\bad_quality_590.jpg",
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\lemon_dataset\\Bad Quality\\bad_quality_591.jpg",
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\lemon_dataset\\Bad Quality\\bad_quality_914.jpg",
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\lemon_dataset\\Bad Quality\\bad_quality_424.jpg",
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\lemon_dataset\\Bad Quality\\bad_quality_347.jpg"
+    ],
+    "815": [
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\lemon_dataset\\Bad Quality\\bad_quality_832.jpg",
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\lemon_dataset\\Bad Quality\\bad_quality_85.jpg",
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\lemon_dataset\\Bad Quality\\bad_quality_831.jpg",
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\lemon_dataset\\Bad Quality\\bad_quality_801.jpg",
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\lemon_dataset\\Bad Quality\\bad_quality_796.jpg"
+    ],
+    "959": [
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\lemon_dataset\\Good Quality\\good_quality_1004.jpg",
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\lemon_dataset\\Good Quality\\good_quality_190.jpg",
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\lemon_dataset\\Good Quality\\good_quality_388.jpg",
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\lemon_dataset\\Good Quality\\good_quality_391.jpg",
+        "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\data\\lemon_dataset\\Good Quality\\good_quality_1057.jpg"
+    ],
+    "model": "C:\\Users\\Morri\\Documents\\Notebooks\\AI\\contrastive\\models\\sim_clr_res18_e(256)_256x256_lemon_d.pth"
+}
