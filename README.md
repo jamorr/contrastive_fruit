@@ -18,15 +18,15 @@ Then to test and train the model you need to download at least one of the follow
   2.  https://www.kaggle.com/datasets/yusufemir/lemon-quality-dataset (its recommended to delete the .git and empty background directories)
   3.  https://www.kaggle.com/datasets/saurabhshahane/mango-varieties-classification
 
-Then to run the container
-`docker run --name pytorch-container --gpus all --shm-size 8G -it --rm -v '<your dir name>':/app pytorch-gpu`
-if run from a CLI, this should spawn a bash shell inside the container
+Then to run the container  
+`docker run --name pytorch-container --gpus all --shm-size 8G -it --rm -v '<your dir name>':/app pytorch-gpu`  
+if run from a CLI, this should spawn a bash shell inside the container  
 
-To train the model, navigate to app/src in the container and run
-`python3 main.py --dataset_train <path to your training dataset> --weights_file <file where you want to save the model weights>`
+To train the model, navigate to app/src in the container and run  
+`python3 main.py --dataset_train <path to your training dataset> --weights_file <file where you want to save the model weights>`  
 
-To test a model, navigate to app/src in the container and run
-`python3 main.py --dataset_test <path to testing dataset (directory)> --weights <file with model weights> --testing`
-currently this is only implemented for SimCLR so do not use for DINO weights.
+To test a model, navigate to app/src in the container and run  
+`python3 main.py --dataset_test <path to testing dataset (directory)> --weights <file with model weights> --testing`  
+currently this is only implemented for SimCLR so do not use for DINO weights.  
 
 The results seen in the paper can be found in the results folder. The model and dataset used to produce results are found inside `annotations.json`. Some examples of KNN neighbors and the confusion matrix are also available.
