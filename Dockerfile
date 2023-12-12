@@ -24,8 +24,8 @@ RUN pip3 install lightly torch torchvision torchaudio matplotlib scikit-learn pa
 # Set the working directory
 WORKDIR /app
 
-# Create a volume at /app/data
-VOLUME /app/data
+# Create a volume at /app
+VOLUME /app
 
 # Copy files from the host to the container
 COPY . /app

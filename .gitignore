@@ -165,3 +165,4 @@ lemon-dataset
 lightning_logs
 src/contrastive_model_0.pth
 fruit
+constrastive_fruit.zip

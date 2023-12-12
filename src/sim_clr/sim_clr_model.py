@@ -9,25 +9,6 @@ from lightly.loss import NTXentLoss
 from lightly.models.modules.heads import SimCLRProjectionHead
 
 
-class LossLoggingCallback(pl.Callback):
-    def __init__(self):
-        super().__init__()
-        self.train_losses = []
-        self.val_losses = []
-
-    def on_train_batch_end(self, *args):
-        print(*args)
-
-    def on_validation_batch_end(self, trainer, pl_module, outputs, batch, batch_idx):
-        self.val_losses.append(outputs.item())
-
-    def on_epoch_end(self, trainer, pl_module):
-        avg_train_loss = sum(self.train_losses) / len(self.train_losses) if self.train_losses else 0.0
-        avg_val_loss = sum(self.val_losses) / len(self.val_losses) if self.val_losses else 0.0
-        trainer.logger.experiment.add_scalars("loss", {"train": avg_train_loss, "val": avg_val_loss}, trainer.current_epoch)
-        self.train_losses = []  # Reset for the next epoch
-        self.val_losses = []
-
 class SimCLRModel(pl.LightningModule):
     def __init__(self, max_epochs:int=100):
         super().__init__()
@@ -69,7 +50,7 @@ class SimCLRModel(pl.LightningModule):
         avg_validation_loss = self.validation_loss / self.validation_set_size
         self.log("val_loss_ssl", avg_validation_loss)
         # self.validation_set_size = 0
-        
+
 
     def configure_optimizers(self):
         optim = torch.optim.SGD(
@@ -77,7 +58,7 @@ class SimCLRModel(pl.LightningModule):
         )
         scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optim, self.max_epochs)
         return [optim], [scheduler]
-    
+
 
 def generate_embeddings(model, dataloader):
     """Generates representations for all images in the dataloader with

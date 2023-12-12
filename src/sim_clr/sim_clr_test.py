@@ -29,7 +29,7 @@ def get_knn_accuracy(
     embeddings,
     filenames,
     res_folder,
-    n_neighbors=5,
+    n_neighbors=6,
 ):
     """Collects predictions made by KNN into a json file"""
 
@@ -91,7 +91,8 @@ def get_knn_accuracy(
     print()
     print(
         f"""
-k                            {n_neighbors}
+KNN # neighbors
+    {n_neighbors}
 Distance weighted
     {classification_report(y_true, y_pred_d)}
 Unweighted
