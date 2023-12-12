@@ -9,7 +9,7 @@ import torch
 import torchvision
 from PIL import Image
 from sklearn.neighbors import NearestNeighbors
-from sklearn.metrics import ConfusionMatrixDisplay, f1_score, classification_report
+from sklearn.metrics import ConfusionMatrixDisplay, classification_report
 
 from lightly.data import LightlyDataset
 from lightly.transforms import utils
@@ -26,31 +26,47 @@ def get_image_as_np_array(filename: str):
 
 
 def get_knn_accuracy(
-    embeddings,
-    filenames,
-    res_folder,
+    embeddings:np.ndarray,
+    filenames:list,
+    res_folder:str|pathlib.Path,
     n_neighbors=6,
 ):
     """Collects predictions made by KNN into a json file"""
-
-    # lets look at the nearest neighbors for some samples
-    # we use the sklearn library
+    # make model
     nbrs = NearestNeighbors(n_neighbors=n_neighbors).fit(embeddings)
+    # get predictions ids
     dist, idxs = nbrs.kneighbors(embeddings)
+
+    # list to store prediciton data
     predictions = []
+
     for ns in zip(dist, idxs):
+        # get pairs of distance and index
         all_ns = list(zip(*ns))
+
+        # closest point should be itself (embedding is deterministic)
         _, true_idx = all_ns[0]
+
+        # get label from image path for ground truth
         ground_truth = pathlib.Path(filenames[int(true_idx)]).parent.as_posix()
+
+        # dicts to store values for each label
         pred_i = defaultdict(int)
         pred_d = defaultdict(int)
+
+        # iterate over neighbors and get associated labels
+        # use labels to create predictions
         for d, i in all_ns[1:]:
             p = pathlib.Path(filenames[int(i)]).parent.as_posix()
 
             pred_d[p] += 1 / (d**2)
             pred_i[p] += 1
+
+        # find final prediction from dict
         i_prediction = max(pred_i, key=pred_i.get)
         d_w_prediction = max(pred_d, key=pred_d.get)
+
+        # add prediction for point to list
         predictions.append(
             {
                 "neighbors": pred_i,
@@ -62,16 +78,25 @@ def get_knn_accuracy(
                 "correct_d": d_w_prediction == ground_truth,
             }
         )
+
+    # calculate the accuracy of each model over all predictions
     acc_d = sum([p["correct_d"] for p in predictions]) / len(predictions)
     acc_i = sum([p["correct_i"] for p in predictions]) / len(predictions)
+
+    # create json dump for predictions
     data = json.dumps(predictions, indent=4)
     with open(
-        res_folder / f"predictions_{round(acc_d*100)}_{round(acc_i*100)}.json", "w"
+        res_folder / f"predictions_{round(acc_d*100)}_{round(acc_i*100)}.json",
+        "w"
     ) as f:
         f.write(data)
+
+    # list of ground truth and predictions for each image
     y_true = [p["gt"] for p in predictions]
     y_pred_d = [p["d_w_prediction"] for p in predictions]
     y_pred_i = [p["i_prediction"] for p in predictions]
+
+    # Make confusion matrices for both and save
     cm_d = ConfusionMatrixDisplay.from_predictions(
         y_true,
         y_pred_d,
@@ -79,7 +104,7 @@ def get_knn_accuracy(
         cmap="Blues",
         colorbar=False
     )
-    cm_d.figure_.savefig(res_folder/"distance_confusion.png", bbox_inches="tight")
+    cm_d.figure_.savefig(res_folder / "distance_confusion.png", bbox_inches="tight")
     cm_i = ConfusionMatrixDisplay.from_predictions(
         y_true,
         y_pred_i,
@@ -87,8 +112,9 @@ def get_knn_accuracy(
         cmap="Blues",
         colorbar=False
     )
-    cm_i.figure_.savefig(res_folder/"voting_confusion.png", bbox_inches="tight")
-    print()
+    cm_i.figure_.savefig(res_folder / "voting_confusion.png", bbox_inches="tight")
+
+    # print prediction results
     print(
         f"""
 KNN # neighbors
@@ -107,7 +133,7 @@ def plot_knn_examples(
     results_dir,
     path_to_weights,
     path_to_data,
-    n_neighbors=5,
+    n_neighbors=6,
     num_examples=6,
 ):
     """Plots multiple rows of random images with their nearest neighbors"""
@@ -137,11 +163,11 @@ def plot_knn_examples(
             ax.set_title(f"d={distances[idx][plot_x_offset]:.3f}")
             # let's disable the axis
             plt.axis("off")
-        plt.savefig(results_dir/f"knn_{idx}.png", bbox_inches="tight")
+        plt.savefig(results_dir / f"knn_{idx}.png", bbox_inches="tight")
         annotations[str(idx)] = files
     # Dump annotations
     data = json.dumps(annotations, indent=4, sort_keys=True)
-    with open(results_dir/"annotations.json", "w") as f:
+    with open(results_dir / "annotations.json", "w") as f:
         f.write(data)
 
 
@@ -192,8 +218,11 @@ def run_self_supervised_testing(args):
         )
     except:
         save_dir = 0
+
     res_path = results_dir / str(save_dir)
     os.makedirs(res_path)
+
+
     plot_knn_examples(
         embeddings, filenames, res_path, args.weights, args.dataset_test
     )

@@ -1,19 +1,19 @@
 import os
-from sim_clr.sim_clr_model import LossLoggingCallback, SimCLRModel
+import pathlib
+from sim_clr.sim_clr_model import SimCLRModel
 
 import pytorch_lightning as pl
 import torch
-import torchvision
 
 from lightly.data import LightlyDataset
-from lightly.transforms import SimCLRTransform, utils
+from lightly.transforms import SimCLRTransform
 from torch.utils.data import random_split
 
 import matplotlib.pyplot as plt
 
-import pandas as pd   
+import pandas as pd
 
-def plot_validation_loss(logs_directory):
+def plot_validation_loss(logs_directory:str|pathlib.Path):
     path_to_metrics = os.path.join(logs_directory, 'metrics.csv')
     df = pd.read_csv(path_to_metrics)
     df.ffill(inplace=True)
@@ -29,14 +29,14 @@ def plot_validation_loss(logs_directory):
 
 
 def train_sim_clr(
-    num_workers,
-    batch_size,
-    path_to_weights,
-    path_to_data,
-    seed,
-    max_epochs,
-    input_size,
-    validate
+    num_workers:int,
+    batch_size:int,
+    path_to_weights:str|pathlib.Path,
+    path_to_data:str|pathlib.Path,
+    seed:int,
+    max_epochs:int,
+    input_size:int,
+    validate:bool
 ):
     pl.seed_everything(seed)
 
@@ -48,9 +48,9 @@ def train_sim_clr(
 
     train_set = LightlyDataset(input_dir=path_to_data, transform=transform)
     # use 20% of training data for validation
-   
 
-    
+
+
     model = SimCLRModel(max_epochs)
     if validate:
         train_set_size = int(len(train_set) * 0.8)
